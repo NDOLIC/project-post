@@ -1,0 +1,11 @@
+{%extends 'instapic/base.html'%}
+
+{% block content %}
+{{block.super}}
+<div class="container">
+{% for post in following %}
+<p>{{post.user.username}}</p>
+
+
+{%empty%}
+<h1>No following</h1>

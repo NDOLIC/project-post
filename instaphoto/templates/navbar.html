@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="border-bottom:2px solid black;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{% url 'home' %}" style="font-family: billabong;font-size:40px;color:black;">MyGram</a>
+    </div>
+    <div class="navbar-right text-center" style="margin:0 auto;">
+    <form class="navbar-form" role="search" action="{% url 'search_results' %}">
+
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search user" name="user">
+        <div class="input-group-btn">
+          <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+    <div class="d-block">
+        {% if user.is_authenticated %}
+        <div >
+            <a href="{%url 'profile' user.id %}" class="d-block"><i class="glyphicon glyphicon-user" style="color:black;"></i></a>
+          
+
+        <ul>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" class="d-inline"><i class="glyphicon glyphicon-option-vertical" style="color:black;margin-top:10px;margin-right: 5px;"></i>
+                      
+                  </a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="{%url 'home'%}">Home</a>
+              </li>
+
+                <li>
+                    <a href="{%url 'edit_profile' user.id %}">Edit Profile</a>
+                  </li>
+              <li>
+                <a href="{%url 'new-post'%}">Add post</a>
+              </li>
+              <li>
+                <a href="/accounts/password/change">Change Password</a>
+              </li>
+              <li>
+                <a href="/logout">Logout</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        {% else %}
+        <li>
+          <a class='btn btn-default' href="/accounts/login">Login</a>
+        </li>
+  
+        {% endif %}
+      </div>
+    </div>
+    </div>
+    
+  </div>
+  
+</nav>
+</body>
+</html>
