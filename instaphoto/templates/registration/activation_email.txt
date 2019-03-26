@@ -1,0 +1,6 @@
+{{activation_key}}
+
+Hi {{user.username}}
+http://{{ site }}{% url 'registration_activate' activation_key %}
+
+This activation key is available for {{expiration_days}} days
