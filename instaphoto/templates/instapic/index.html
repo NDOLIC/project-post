@@ -1,0 +1,41 @@
+{%extends 'instapic/base.html'%}
+
+{% block content %}
+{{block.super}}
+<div class="container">
+ 
+{% for post in posts%}
+{% if post.user.profile in following %}
+<div class="container">
+<a href="profile/{{post.user.id}}">
+<div class="card">
+  <div class="card card-title row"> 
+  <img src="{{post.user.profile.photo.url}}" alt="" height="auto" width="50" class="col-md-1" id="profile">
+<p class="col-md-6" id='name'>{{post.user.username}}</p>
+</div>
+</a>
+</div>
+<div class="container">
+<div class='card card-body'>
+<a href="/post/{{post.id}}"> <img src="{{post.image.url}}" alt="" id="post" ></a>
+</div>
+<div class="panel panel-footer">
+<a href="/like_home/{{post.id}}"><button><i class="glyphicon glyphicon-heart glyphicon-lg"></i></button></a>
+<a href="/new_comment/{{post.id}}"><button><i class="	glyphicon glyphicon-comment"></i></button></a>
+<strong> <p>{{post.likess}} likes</p></strong>
+<span><p><strong> {{post.user.username}}</strong></span><span> {% autoescape on %}{{post.caption|safe}} {% endautoescape %}</span></p>
+</div>
+</div>
+{%endif%}
+</div>
+
+</div>
+
+{%endfor%}
+<div class="container">
+{% if following|length == 0%}
+ <h1>You're not following anyone yet.Follow people to see their posts</h1>
+ {%endif%}
+</div>
+{% endblock %}
+
