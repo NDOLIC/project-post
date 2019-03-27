@@ -22,6 +22,6 @@ urlpatterns = [
     url(r'^tinymce/', include('tinymce.urls')),
     url('^activity/', include('actstream.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'',include('mygram.urls')),
+    url(r'',include('instapic.urls')),
      url(r'^logout/$', views.logout, {"next_page": '/'})
 ]
