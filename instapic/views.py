@@ -16,8 +16,6 @@ def home(request):
      current_user=request.user
      profile=Profile.objects.get(user=current_user)
      following1=following(request.user)
-
-     
      posts=Image.objects.all()
     
      return render(request,'instapic/index.html',{'title':title , 'posts':posts, 'following':following1})
@@ -94,7 +92,7 @@ def search_results(request):
     if 'user' in request.GET and request.GET["user"]:
         search_term = request.GET.get("user")
         searched_users = search_by_username(search_term)
-        message = f"{search_term}"
+        message =f"{search_term}"
 
         return render(request, 'instapic/search.html',{"message":message,"users": searched_users})
 

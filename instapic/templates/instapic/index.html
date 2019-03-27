@@ -1,9 +1,11 @@
 {%extends 'instapic/base.html'%}
+{% load bootstrap3 %}
+{% load staticfiles %}
 
 {% block content %}
 {{block.super}}
 <div class="container">
- 
+  <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
 {% for post in posts%}
 {% if post.user.profile in following %}
 <div class="container">
@@ -32,9 +34,10 @@
 </div>
 
 {%endfor%}
-<div class="container">
+<div class="container" style="background-image:url(https://i.pinimg.com/236x/cb/1f/55/cb1f55ece5546d7e70db849de83c03c8.jpg);background-repeat:no-repeat;background-size: cover;">
 {% if following|length == 0%}
- <h1></h1>
+ <h1 style="text-align:center;font-family: 'Luckiest Guy', cursive;color: white;">Welcome to Instagram</h1>
+ <img src="http://michiganjournal.org/wp-content/uploads/2013/02/instagram-logo.jpg" style="display: block; margin-left: auto; margin-right: auto;">
  {%endif%}
 </div>
 {% endblock %}
