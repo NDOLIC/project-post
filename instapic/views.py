@@ -112,10 +112,10 @@ def profile(request,id):
      user=User.objects.get(id=id)
      profile=Profile.objects.get(user=user)
      images=Image.objects.filter(user=user)
-     following1=following(user)
-     followers1=followers(profile)
+    #  following=following(user)
+    #  followers1=followers(profile)
     
-     return render(request, 'instapic/profile.html',{"user":user,"profile": profile, 'images':images,'following':following1,'followers':followers1})
+     return render(request, 'instapic/profile.html',{"user":user,"profile": profile, 'images':images})
      
 @login_required(login_url='/accounts/login/')
 def edit_profile(request,edit):
@@ -132,7 +132,7 @@ def edit_profile(request,edit):
             profile.user=current_user
             
             profile.save()
-        return redirect('index')
+        return redirect('home')
 
     else:
         form = Profileform()
