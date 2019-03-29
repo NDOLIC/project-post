@@ -4,6 +4,7 @@
 
 {% block content %}
 {{super}}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
 <div class="container">
 {% for post in following %}
 <p>{{post.user.username}}</p>
