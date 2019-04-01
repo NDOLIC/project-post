@@ -1,13 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http  import HttpResponse,Http404,HttpResponseRedirect
 from django.contrib.auth.models import User
-from .forms import NewPostForm, NewCommentForm, Profileform
+from .forms import NewPostForm, Profileform
 from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
-from .models import Image, Profile, Comment, Follow, Likes
+from .models import Image, Profile
 from django.contrib.auth import authenticate, login 
-from actstream.actions import follow, unfollow
-from actstream.models import following, followers
 
 
 @login_required(login_url='/accounts/register/')
