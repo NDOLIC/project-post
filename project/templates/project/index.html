@@ -7,7 +7,7 @@
 <div class="container">
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
 {% for post in posts%}
-{% if post.user.profile in following %}
+
 <div class="container">
 <a href="profile/{{post.user.id}}">
 <div class="card">
@@ -23,12 +23,11 @@
 </div>
 <div class="panel panel-footer">
 <a href="/like_home/{{post.id}}"><button><i class="glyphicon glyphicon-heart glyphicon-lg"></i></button></a>
-<a href="/new_comment/{{post.id}}"><button><i class="	glyphicon glyphicon-comment"></i></button></a>
-<strong> <p>{{post.likess}} likes</p></strong>
+
 <span><p><strong> {{post.user.username}}</strong></span><span> {% autoescape on %}{{post.caption|safe}} {% endautoescape %}</span></p>
 </div>
 </div>
-{%endif%}
+
 </div>
 
 </div>
@@ -37,17 +36,6 @@
 <div class="container" style="background-color:#807E83;background-repeat:no-repeat;background-size: cover;">
 {% if following|length == 0%}
  <h1 style="text-align:center;font-family: 'Kaushan Script', cursive;color: black;">Welcome To</h1>
- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1VGDnRvxo_I1fe8lcxqI0AnIUbr6hxSicTI7tYj2b8Bsew0xQxQ" style="display: block; margin-left: auto; margin-right: auto; padding: 40px;">
-
- <p style="font-family: 'Kaushan Script', cursive; font-size: 20px;">Pick a good username. Your Instagram journey starts when you set up your account. ...
-  Select your niche (and stick to it) ...
-  Tell a story. ...
-  Use relevant hashtags. ...
-  Geotag your discoveries and places. ...
-  Follow, tag and engage with your Instamates. ...
-  Use the Instagram Slideshow to introduce your blog post. ...
-  Stories and more stories.
-  </p>
  {%endif%}
 </div>
 {% endblock %}
