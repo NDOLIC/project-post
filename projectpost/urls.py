@@ -1,4 +1,4 @@
-"""instaphoto URL Configuration
+"""projectpost URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.11/topics/http/urls/
@@ -18,9 +18,9 @@ from django.contrib import admin
 from django.contrib.auth import views 
 
 urlpatterns = [
+    url(r'^admin/', admin.site.urls),
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^accounts/', include('registration.backends.simple.urls')),
-    url(r'^admin/', admin.site.urls),
     url(r'',include('project.urls')),
     url(r'^logout/$', views.logout, {"next_page": '/'}),
 ]
