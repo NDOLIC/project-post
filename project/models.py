@@ -62,28 +62,3 @@ class Image(models.Model):
      def update_caption(self,cap):
          self.caption=cap
          self.save()
-
-class Likes(models.Model):
-    likes=models.IntegerField(default=0)
-    liked=models.BooleanField(default=False)
-    user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
-    image=models.ForeignKey(Image,null=True)
-    created = models.DateTimeField(auto_now_add=True)  
-    
-class Comment(models.Model):
-    comment=models.TextField()
-    image=models.ForeignKey(Image,default=0)
-    user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
-    def save_comment(self):
-        self.save()
-    def delete_comment(self):
-       self.delete()
-
-    def update_comment(self,comment):
-         self.comment=comment
-         self.save()
-
-
-class Follow(models.Model):
-     follower=models.ForeignKey(Profile, related_name='follower')
-     following=models.ForeignKey(Profile ,related_name='followee')

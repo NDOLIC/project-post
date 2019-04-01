@@ -60,32 +60,9 @@ def like_home(request,picture_id):
         message='like successful'
     return redirect('home')
 @login_required(login_url='/accounts/login/')
-def like_post(request, picture_id):
-    post=Image.objects.get(id=picture_id)
-    new_like, created = Likes.objects.get_or_create(user=request.user, image_id=picture_id)
-    if not created:
-        message='U already liked the picture'
-    else:
-        message='like successful'
-    return redirect('post',post.id)
 
 
-@login_required(login_url='/accounts/login/')
-def add_comment(request,id):
-        current_user = request.user
-        post=Image.objects.get(id=id)
-        if request.method == 'POST':
-               form = NewCommentForm(request.POST)
-               if form.is_valid():
-                    comment= form.cleaned_data['comment']
-                   
-                    new_comment = Comment(comment = comment,user =current_user,image=post)
-                    new_comment.save()
-                    
-                    HttpResponseRedirect('home')
-        else:
-                    form = NewCommentForm()
-        return render(request, 'instapic/new_comment.html', {"letterForm":form,'post':post,'user':current_user})
+
 @login_required(login_url='/accounts/login/')
 def search_results(request):
 
@@ -98,7 +75,7 @@ def search_results(request):
 
     else:
         message = "You haven't searched for any term"
-        return render(request, 'grams/search.html',{"message":message})
+        return render(request, 'project/search.html',{"message":message})
 
      
 
@@ -137,28 +114,4 @@ def edit_profile(request,edit):
     return render(request, 'edit_profile.html', {"form": form , 'user':current_user})
 
 
-@login_required(login_url='/accounts/login/')
-def follow_profile(request,id):
-    profile=Profile.objects.get(id=id)
-    follow(request.user,profile)
-    return redirect('index')
 
-@login_required(login_url='/accounts/login/')
-def unfollow_profile(request,id):
-    profile=Profile.objects.get(id=id)
-    unfollow(request.user,profile)
-    return redirect('index')
-
-
-@login_required(login_url='/accounts/login/')
-def who_following(request,id):
-    user=User.objects.get(id=id)
-    following1=following(user)
-    return render(request, 'following.html', {'user':request.user, 'following':following1})
-
-
-@login_required(login_url='/accounts/login/')
-def who_followers(request,id):
-    user=Profile.objects.get(id=id)
-    following1=followers(user)
-    return render(request, 'followers.html', {'user':request.user, 'following':following1})

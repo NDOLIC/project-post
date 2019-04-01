@@ -19,9 +19,8 @@ from django.contrib.auth import views
 
 urlpatterns = [
     url(r'^tinymce/', include('tinymce.urls')),
-    url('^activity/', include('actstream.urls')),
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'',include('instapic.urls')),
+    url(r'',include('project.urls')),
     url(r'^logout/$', views.logout, {"next_page": '/'}),
 ]
