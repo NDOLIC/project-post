@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.test import TestCase
-from .models import Image,Profile,Comment
+from .models import Image,Profile
 
 class ImageTestClass(TestCase):
        def setUp(self):
@@ -62,34 +62,3 @@ class ProfileTestClass(TestCase):
            self.assertTrue( self.profile.bio == bio) 
 
 
-class CommentTestClass(TestCase):
-       def setUp(self):
-          
-          self.profile=Profile(id=123,photo='Rwanda',bio='Kigali')
-          self.image=Image(id=1,image='@heroo',name='koko',caption="koko koko koko okruuuuuu",likes=2,profile=self.profile)
-          self.comment=Comment(id=1,comment='food',image=self.image)
-        
-  
-       def test_save_comment(self):
-         self.profile.save_profile()
-         self.image.save_image()
-         self.comment.save_comment()
-         comments = Comment.objects.all()
-         self.assertTrue(len(comments) > 0) 
-
-        
-       def test_delete_comment(self):
-           self.profile.save_profile()
-           self.image.save_image()
-           self.comment.save_comment()
-           self.comment.delete_comment()
-           comments = Comment.objects.all()
-           self.assertTrue(len(comments) == 0)  
-
-       def test_update_comment(self):
-           self.profile.save_profile()
-           self.image.save_image()
-           self.comment.save_comment()
-           comment='kiki'
-           self.comment.update_comment(comment)
-           self.assertTrue( self.comment.comment == comment) 

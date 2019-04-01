@@ -4,10 +4,8 @@ from django import forms
 class NewPostForm(forms.ModelForm):
     class Meta:
         model = Image
-        exclude = ['user','profile', 'pub_date','likess','follow']
+        exclude = ['user','profile', 'pub_date']
 
-class NewCommentForm(forms.Form):
-    comment = forms.CharField(label='Comment',max_length=600)
 
 class Profileform(forms.ModelForm):
      class Meta:
