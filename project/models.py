@@ -13,8 +13,7 @@ class Profile(models.Model):
     photo=models.ImageField(upload_to='images/',default='images/avatar.jpg')
     bio=models.TextField()
     user=models.OneToOneField(User,on_delete=models.CASCADE,null=True)
-    follow=models.NullBooleanField(default=False)
-
+    projectsposted = models.ForeignKey(Project,null=True)
 
     
     def save_profile(self):
@@ -25,14 +24,6 @@ class Profile(models.Model):
     def update_bio(self,bio):
          self.bio=bio
          self.save()
-   
-    # @property
-    # def image_url(self):
-    #     if self.photo and hasattr(self.photo, 'url'):
-    #        return self.photo.url
-
-# registry.register(Profile)
-
 @receiver(post_save, sender=User)
 def update_user_profile(sender, instance, created, **kwargs):
     if created:
@@ -41,24 +32,20 @@ def update_user_profile(sender, instance, created, **kwargs):
 
 
 
-class Image(models.Model):
-     name=models.CharField(max_length=100)
-     image=models.ImageField(upload_to = 'images/')
-     caption=HTMLField()
-     likess=models.IntegerField(null=True)
-     
-     pub_date = models.DateTimeField(auto_now_add=True)
-     profile=models.ForeignKey(Profile, null=True)
-     user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
-    #  follow=models.ForeignKey(Follow, null=True)
+class Post(models.Model):
+    user = models.OneToOneField(User)
+    post = models.ForeignKey(Project)
 
-    
-     def save_image(self):
-         self.save()
+class Project(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField(max_length=200)
+    link = models.CharField(max_length=1000)
+    landingpic = models.ImageField(upload_to='images')
+    username= models.CharField(max_length=20)
+    user = models.OneToOneField(User)
 
-     def delete_image(self):
-       self.delete()
-       
-     def update_caption(self,cap):
-         self.caption=cap
-         self.save()
+    def save_project(self):
+        self.save()
+
+    def delete_project(self):
+        self.delete()

@@ -22,17 +22,9 @@
 
    </div>
   
-  <a href="/like_post/{{post.id}}"><button><i class="glyphicon glyphicon-heart glyphicon-lg"></i><span>{{likes}}</span></button></a>
-  <a href="/new_comment/{{post.id}}"><p> comments {{comments|length}}</p></a>
    <div class="row">
       <p>Posted {{post.pub_date|timesince}} by {{post.user.username}}</p>
     </div>
-      <h3>Comments</h3>
-      {% for comment in comments %}
-      <p>{{comment.user.username}}</p>
-        <p>{{comment.comment}}</p>
-      {%endfor%}
-
  </div>
 
  {% endblock %}

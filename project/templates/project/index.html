@@ -1,4 +1,4 @@
-{%extends 'instapic/base.html'%}
+{%extends 'project/base.html'%}
 {% load bootstrap3 %}
 {% load staticfiles %}
 
@@ -22,7 +22,6 @@
 <a href="/post/{{post.id}}"> <img src="{{post.image.url}}" alt="" id="post" ></a>
 </div>
 <div class="panel panel-footer">
-<a href="/like_home/{{post.id}}"><button><i class="glyphicon glyphicon-heart glyphicon-lg"></i></button></a>
 
 <span><p><strong> {{post.user.username}}</strong></span><span> {% autoescape on %}{{post.caption|safe}} {% endautoescape %}</span></p>
 </div>
@@ -37,7 +36,10 @@
 {% if following|length == 0%}
  <h1 style="text-align:center;font-family: 'Kaushan Script', cursive;color: black;">Welcome To</h1>
  {%endif%}
-</div>
-{% endblock %}
 
-
+ {% endblock %}
+ <!--End of the block content-->
+ {% block scripts %} {{block.super}}
+   <script type="text/javascript" src="{%static 'js/project.js'%}"></script>
+ {% endblock %}
+ 

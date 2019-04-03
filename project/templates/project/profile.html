@@ -1,8 +1,8 @@
-{%extends 'instapic/base.html'%}
+{%extends 'project/base.html'%}
 {% load bootstrap3 %}
 {% load staticfiles %}
 
-{% load activity_tags %}
+
 
  {% block content %}
  {{ super }}
@@ -18,21 +18,12 @@
     <div class="row">
       {%if user.is_authenticated and user.profile == current_user.profile %}
       <span> <h3 class="col-md-4">{{user.username}}</h3></span> <span> <a href="/edit_profile/{{user.id}}" class="col-md-3" id="follow"><button>Edit Profile</button></a></span>
-      {% else %}
-        <span> <h3 class="col-md-4">{{user.username}}</h3></span> <span> <a href="/follow/{{profile.id}}" class="col-md-3" id="follow"><button>Follow</button></a></span><span> <a href="/unfollow/{{profile.id}}" class="col-md-3" id="follow"><button>Unfollow</button></a></span>
+      
       {%endif%}
       <div class="desc">
         <p>{{user.profile.bio}}</p>
       </div>
     </div>
-    
-    
-      <div class="row">
-        <p class='col-md-4'>{{images|length}} posts</p>
-        <a href="/followers/{{profile.id}}" class='col-md-4' style="color:black;"> <p>{{followers|length}} followers</p></a>
-        <a href="/following/{{user.id}}" style="color:black;"><p class='col-md-4'>{{following|length}} following</p></a>
-      </div>
-    
    
     <div class="responsive">
       <div class="gallery">
