@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http  import HttpResponse,Http404,HttpResponseRedirect
 from django.contrib.auth.models import User
-from .forms import NewPostForm, Profileform
+from .forms import UserUpdateForm,ProfileUpdateForm,ProjectsForm
 from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
 from .models import Image, Profile
@@ -38,4 +38,38 @@ class ProjectList(APIView):
 
     def post(self):
         pass
+@login_required(login_url='/accounts/login/')
+def projects(request):
+    project = Project.objects.all()
+    return render(request,'projects.html',{"project":project})
 
+def register(request):
+    return render(request,'registration/register_form.html')
+
+@login_required(login_url='/accounts/login/')
+def postprojects(request):
+    projform = ProjectsForm()
+    projform.owner = request.user
+    if request.method == "POST":
+        projform = ProjectsForm(request.POST,request.FILES)
+        if projform.is_valid():
+           projform.save()
+           return render (request,'project.html')
+        else:
+           projform=ProjectsForm(request.POST,request.FILES)
+
+    return render(request,'projects_form.html',{"projform":projform})
+
+@login_required(login_url='/accounts/login/')
+def editpost(request):
+    poform = ProfileUpdateForm(request.POST,request.FILES)
+    if request.method == 'POST':
+        poform = ProfileUpdateForm(request.POST,request.FILES)
+        if poform.is_valid():
+            add = poform.save(commit=False)
+            add.save()
+            return render(request,'profile.html')
+        else:
+            poform = ProfileUpdateForm(request.POST,request.FILES)
+
+    return render(request,'edit.html',locals())
